@@ -7,14 +7,19 @@
         <p>
         {{ form.username.label }}
         </p>
-        {{ form.username() }}
+        {{ form.username(size=20) }}
     </div>
     <div>
         <p>
             {{ form.password.label }}
         </p>
-        {{ form.password() }}
+        {{ form.password(size=20) }}
     </div>
+    <br>
+    <div>
+        {{ form.remember_me }} {{ form.remember_me.label }}    
+    </div>
+
     <br>
     {{ form.submit() }}
 </form>
