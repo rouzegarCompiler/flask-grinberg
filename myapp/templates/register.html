@@ -16,6 +16,17 @@
     </div>
     <div>
         <p>
+        {{ form.email.label }}
+        </p>
+        {{ form.email(size=20) }} <br>
+        {% with errors=form.email.errors %}
+            {% for error in errors %}
+                <span style="color: red;">{{ error }}</span>
+            {% endfor %}
+        {% endwith %}
+    </div>
+    <div>
+        <p>
             {{ form.password.label }}
         </p>
         {{ form.password(size=20) }} <br>
@@ -25,14 +36,18 @@
             {% endfor %}
         {% endwith %}
     </div>
-    <br>
     <div>
-        {{ form.remember_me }} {{ form.remember_me.label }}    
+        <p>
+            {{ form.password2.label }}
+        </p>
+        {{ form.password2(size=20) }} <br>
+        {% with errors=form.password2.errors %}
+            {% for error in errors %}
+                <span style="color: red;">{{ error }}</span>
+            {% endfor %}
+        {% endwith %}
     </div>
-
     <br>
     {{ form.submit() }}
 </form>
-<br>
-<p>Didn't register ? Register <a href="{{ url_for('register') }}">here</a></p>
 {% endblock %}
