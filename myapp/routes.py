@@ -1,10 +1,18 @@
 from flask import render_template, redirect, flash, url_for, request
 from flask_login import login_user, current_user, logout_user, login_required
 from werkzeug.urls import url_parse
+from datetime import datetime
 from myapp import app, db
 from myapp.forms import LoginForm, RegisterForm
 from myapp.models import User
 from myapp.faker import fake
+
+
+@app.before_request
+def before_request_handler():
+    if current_user.is_authenticated:
+        current_user.last_seen = datetime.utcnow()
+        db.session.commit()
 
 
 @app.route("/")
