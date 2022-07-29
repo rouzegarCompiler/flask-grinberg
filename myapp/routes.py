@@ -4,6 +4,7 @@ from werkzeug.urls import url_parse
 from myapp import app, db
 from myapp.forms import LoginForm, RegisterForm
 from myapp.models import User
+from myapp.faker import fake
 
 
 @app.route("/")
@@ -63,3 +64,26 @@ def register():
         flash("You're registration completed !!!")
         return redirect(url_for("login"))
     return render_template("register.html", form=register_form)
+
+
+@app.route("/user/<username>")
+@login_required
+def user(username):
+    user = User.query.filter_by(username=username).first_or_404()
+    user_posts = [
+        {
+            "author": user,
+            "body": fake.text()
+        },
+        {
+            "author": user,
+            "body": fake.text()
+        }
+        ,
+        {
+            "author": user,
+            "body": fake.text()
+        }
+    ]
+
+    return render_template("user.html", user=user, posts=user_posts)
