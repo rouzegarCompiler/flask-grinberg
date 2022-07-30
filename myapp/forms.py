@@ -33,3 +33,13 @@ class EditProfileForm(FlaskForm):
     username = StringField(label="Username")
     about_me = TextAreaField(label="About Me", validators=[Length(min=0, max=140)])
     submit = SubmitField("Edit")
+
+    def __init__(self, original_user , *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.original_user = original_user
+    
+    def validate_username(self,username):
+        if self.original_user != username.data:
+            user = User.query.filter_by(username=username.data).first()
+            if user is not None:
+                raise ValidationError("Username is duplicated, Enter another username")
