@@ -3,7 +3,7 @@ from flask_login import login_user, current_user, logout_user, login_required
 from werkzeug.urls import url_parse
 from datetime import datetime
 from myapp import app, db
-from myapp.forms import LoginForm, RegisterForm
+from myapp.forms import LoginForm, RegisterForm, EditProfileForm
 from myapp.models import User
 from myapp.faker import fake
 
@@ -95,3 +95,18 @@ def user(username):
     ]
 
     return render_template("user.html", user=user, posts=user_posts)
+
+
+@app.route("/edit_profile", methods=["GET", "POST"])
+@login_required
+def edit_profile():
+    edit_profile_form = EditProfileForm()
+    if request.method.upper() == "POST" and edit_profile_form.validate_on_submit():
+        current_user.username = edit_profile_form.username.data
+        current_user.about_me = edit_profile_form.about_me.data
+        db.session.commit()
+        flash("Profile updated successfully !")
+    elif request.method.upper() == "GET":
+        edit_profile_form.username.data = current_user.username
+        edit_profile_form.about_me.data = current_user.about_me
+    return render_template("edit_profile.html", form=edit_profile_form)

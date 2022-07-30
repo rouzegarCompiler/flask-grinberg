@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+<form action="" method="post">
+    {{ form.hidden_tag() }}
+    <div>
+        <p>
+        {{ form.username.label }}
+        </p>
+        {{ form.username(size=20) }} <br>
+        {% with errors=form.username.errors %}
+            {% for error in errors %}
+                <span style="color: red;">{{ error }}</span>
+            {% endfor %}
+        {% endwith %}
+    </div>
+    <div>
+        <p>
+        {{ form.about_me.label }}
+        </p>
+        {{ form.about_me(cols=20,rows=10) }} <br>
+        {% with errors=form.about_me.errors %}
+            {% for error in errors %}
+                <span style="color: red;">{{ error }}</span>
+            {% endfor %}
+        {% endwith %}
+    </div>
+    <br>
+    {{ form.submit() }}
+</form>
+{% endblock %}

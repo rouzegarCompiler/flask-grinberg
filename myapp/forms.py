@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, SubmitField
-from wtforms.validators import DataRequired, Email, EqualTo, ValidationError
+from wtforms import StringField, PasswordField, BooleanField, SubmitField, TextAreaField
+from wtforms.validators import DataRequired, Email, EqualTo, ValidationError, Length
 from myapp.models import User
 
 
@@ -18,7 +18,6 @@ class RegisterForm(FlaskForm):
     password2 = PasswordField(label="Password", validators=[DataRequired(), EqualTo("password")])
     submit = SubmitField("Register")
 
-
     def validate_username(self, username):
         user = User.query.filter_by(username=username.data).first()
         if user is not None:
@@ -28,3 +27,9 @@ class RegisterForm(FlaskForm):
         user = User.query.filter_by(email=email.data).first()
         if user is not None:
             raise ValidationError("Email is duplicated, Enter another email")
+
+
+class EditProfileForm(FlaskForm):
+    username = StringField(label="Username")
+    about_me = TextAreaField(label="About Me", validators=[Length(min=0, max=140)])
+    submit = SubmitField("Edit")
