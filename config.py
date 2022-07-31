@@ -19,7 +19,7 @@ class Config(object):
 
     SQLALCHEMY_TRACK_MODIFICATIONS = os.environ.get("SQLALCHEMY_TRACK_MODIFICATIONS") or False
 
-    SQLALCHEMY_ECHO = False
+    SQLALCHEMY_ECHO = True
 
     # Email
     MAIL_SERVER = os.environ.get("MAIL_SERVER") or "localhost"

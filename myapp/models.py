@@ -5,6 +5,13 @@ from flask_login import UserMixin
 from myapp import db, login
 
 
+follow_rel = db.Table(
+    "follow_rel",
+    db.Column("follower_id",db.Integer,db.ForeignKey("user.id")),
+    db.Column("followed_id",db.Integer,db.ForeignKey("user.id"))
+)
+
+
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(64), index=True, unique=True)
@@ -13,6 +20,12 @@ class User(db.Model, UserMixin):
     posts = db.relationship('Post', backref="author", lazy="dynamic")
     about_me = db.Column(db.String(140))
     last_seen = db.Column(db.DateTime(), default=datetime.utcnow)
+    followed = db.relationship('User',secondary=follow_rel,
+        primaryjoin = (id == follow_rel.c.follower_id),
+        secondaryjoin = (id == follow_rel.c.followed_id),
+        backref=db.backref("followers",lazy="dynamic"),
+        lazy="dynamic"
+    )
 
     def __repr__(self):
         return f"<User {self.username} >"
@@ -28,6 +41,27 @@ class User(db.Model, UserMixin):
         gravatar_link = "https://gravatar.com/avatar/{}?s={}&d={}"
         user_avatar = gravatar_link.format(digest, size, default)
         return user_avatar
+    
+    def is_following(self, user):
+        return self.followed.filter(follow_rel.c.followed_id == user.id).count() > 0
+
+    
+    def follow(self, user):
+        if not self.is_following(user):
+            self.followed.append(user)
+
+    def unfollow(self, user):
+        if self.is_following(user):
+            self.followed.remove(user)
+
+    def following_posts(self):
+        posts = Post.query.join(follow_rel, follow_rel.c.followed_id == Post.user_id).filter(follow_rel.c.follower_id == self.id)
+        return posts
+
+    def show_posts(self):
+        posts = self.following_posts().union(self.posts).order_by(Post.timestamp.desc()).all()
+        return posts
+
 
 
 @login.user_loader
