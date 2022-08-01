@@ -1,30 +1,63 @@
-2022-07-31 22:32:17,796 INFO Microblog startup [in C:\Users\SMR\Desktop\flask-grinberg\flask-grinberg\myapp\logger.py:61]
-2022-07-31 22:33:49,020 INFO Microblog startup [in C:\Users\SMR\Desktop\flask-grinberg\flask-grinberg\myapp\logger.py:61]
-2022-07-31 22:34:03,590 INFO Microblog startup [in C:\Users\SMR\Desktop\flask-grinberg\flask-grinberg\myapp\logger.py:61]
-2022-07-31 22:34:59,450 INFO Microblog startup [in C:\Users\SMR\Desktop\flask-grinberg\flask-grinberg\myapp\logger.py:61]
-2022-07-31 22:39:23,273 INFO Microblog startup [in C:\Users\SMR\Desktop\flask-grinberg\flask-grinberg\myapp\logger.py:61]
-2022-07-31 22:40:22,282 INFO Microblog startup [in C:\Users\SMR\Desktop\flask-grinberg\flask-grinberg\myapp\logger.py:61]
-2022-07-31 22:42:31,457 INFO Microblog startup [in C:\Users\SMR\Desktop\flask-grinberg\flask-grinberg\myapp\logger.py:61]
-2022-07-31 22:42:48,524 INFO Microblog startup [in C:\Users\SMR\Desktop\flask-grinberg\flask-grinberg\myapp\logger.py:61]
-2022-07-31 22:43:32,007 INFO Microblog startup [in C:\Users\SMR\Desktop\flask-grinberg\flask-grinberg\myapp\logger.py:61]
-2022-07-31 22:43:54,959 INFO Microblog startup [in C:\Users\SMR\Desktop\flask-grinberg\flask-grinberg\myapp\logger.py:61]
-2022-07-31 22:45:32,660 INFO Microblog startup [in C:\Users\SMR\Desktop\flask-grinberg\flask-grinberg\myapp\logger.py:61]
-2022-07-31 22:46:32,039 INFO Microblog startup [in C:\Users\SMR\Desktop\flask-grinberg\flask-grinberg\myapp\logger.py:61]
-2022-07-31 22:47:25,130 INFO Microblog startup [in C:\Users\SMR\Desktop\flask-grinberg\flask-grinberg\myapp\logger.py:61]
-2022-07-31 22:47:41,531 INFO Microblog startup [in C:\Users\SMR\Desktop\flask-grinberg\flask-grinberg\myapp\logger.py:61]
-2022-07-31 22:47:52,934 INFO Microblog startup [in C:\Users\SMR\Desktop\flask-grinberg\flask-grinberg\myapp\logger.py:61]
-2022-07-31 22:48:07,875 INFO Microblog startup [in C:\Users\SMR\Desktop\flask-grinberg\flask-grinberg\myapp\logger.py:61]
-2022-07-31 22:48:46,669 INFO Microblog startup [in C:\Users\SMR\Desktop\flask-grinberg\flask-grinberg\myapp\logger.py:61]
-2022-07-31 22:49:23,084 INFO Microblog startup [in C:\Users\SMR\Desktop\flask-grinberg\flask-grinberg\myapp\logger.py:61]
-2022-07-31 22:49:47,774 INFO Microblog startup [in C:\Users\SMR\Desktop\flask-grinberg\flask-grinberg\myapp\logger.py:61]
-2022-07-31 22:50:56,610 INFO Microblog startup [in C:\Users\SMR\Desktop\flask-grinberg\flask-grinberg\myapp\logger.py:61]
-2022-07-31 22:51:20,402 INFO Microblog startup [in C:\Users\SMR\Desktop\flask-grinberg\flask-grinberg\myapp\logger.py:61]
-2022-07-31 22:51:37,420 INFO Microblog startup [in C:\Users\SMR\Desktop\flask-grinberg\flask-grinberg\myapp\logger.py:61]
-2022-07-31 22:51:48,139 INFO Microblog startup [in C:\Users\SMR\Desktop\flask-grinberg\flask-grinberg\myapp\logger.py:61]
-2022-07-31 22:55:47,303 INFO Microblog startup [in C:\Users\SMR\Desktop\flask-grinberg\flask-grinberg\myapp\logger.py:61]
-2022-07-31 22:56:43,200 INFO Microblog startup [in C:\Users\SMR\Desktop\flask-grinberg\flask-grinberg\myapp\logger.py:61]
-2022-07-31 22:58:38,856 INFO Microblog startup [in C:\Users\SMR\Desktop\flask-grinberg\flask-grinberg\myapp\logger.py:61]
-2022-07-31 23:04:01,134 INFO Microblog startup [in C:\Users\SMR\Desktop\flask-grinberg\flask-grinberg\myapp\logger.py:61]
-2022-07-31 23:05:32,462 INFO Microblog startup [in C:\Users\SMR\Desktop\flask-grinberg\flask-grinberg\myapp\logger.py:61]
-2022-07-31 23:06:37,022 INFO Microblog startup [in C:\Users\SMR\Desktop\flask-grinberg\flask-grinberg\myapp\logger.py:61]
-2022-07-31 23:06:57,524 INFO Microblog startup [in C:\Users\SMR\Desktop\flask-grinberg\flask-grinberg\myapp\logger.py:61]
+2022-07-31 23:38:32,761 ERROR Exception on /follow/mohammad [GET] [in C:\Users\SMR\Desktop\flask-grinberg\flask-grinberg\venv\lib\site-packages\flask\app.py:1449]
+Traceback (most recent call last):
+  File "C:\Users\SMR\Desktop\flask-grinberg\flask-grinberg\venv\lib\site-packages\flask\app.py", line 2073, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\SMR\Desktop\flask-grinberg\flask-grinberg\venv\lib\site-packages\flask\app.py", line 1519, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\SMR\Desktop\flask-grinberg\flask-grinberg\venv\lib\site-packages\flask\app.py", line 1517, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\SMR\Desktop\flask-grinberg\flask-grinberg\venv\lib\site-packages\flask\app.py", line 1503, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
+  File "C:\Users\SMR\Desktop\flask-grinberg\flask-grinberg\venv\lib\site-packages\flask_login\utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+  File "C:\Users\SMR\Desktop\flask-grinberg\flask-grinberg\myapp\routes.py", line 129, in follow
+    return redirect(url_for("user",username))
+TypeError: url_for() takes 1 positional argument but 2 were given
+2022-07-31 23:40:09,135 INFO Microblog startup [in C:\Users\SMR\Desktop\flask-grinberg\flask-grinberg\myapp\logger.py:61]
+2022-07-31 23:40:49,043 ERROR Exception on /follow/ali [GET] [in C:\Users\SMR\Desktop\flask-grinberg\flask-grinberg\venv\lib\site-packages\flask\app.py:1449]
+Traceback (most recent call last):
+  File "C:\Users\SMR\Desktop\flask-grinberg\flask-grinberg\venv\lib\site-packages\flask\app.py", line 2073, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\SMR\Desktop\flask-grinberg\flask-grinberg\venv\lib\site-packages\flask\app.py", line 1519, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\SMR\Desktop\flask-grinberg\flask-grinberg\venv\lib\site-packages\flask\app.py", line 1517, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\SMR\Desktop\flask-grinberg\flask-grinberg\venv\lib\site-packages\flask\app.py", line 1503, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
+  File "C:\Users\SMR\Desktop\flask-grinberg\flask-grinberg\venv\lib\site-packages\flask_login\utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+  File "C:\Users\SMR\Desktop\flask-grinberg\flask-grinberg\myapp\routes.py", line 129, in follow
+    return redirect(url_for("user",username))
+TypeError: url_for() takes 1 positional argument but 2 were given
+2022-07-31 23:42:25,771 INFO Microblog startup [in C:\Users\SMR\Desktop\flask-grinberg\flask-grinberg\myapp\logger.py:61]
+2022-07-31 23:42:35,449 ERROR Exception on /follow/ali [GET] [in C:\Users\SMR\Desktop\flask-grinberg\flask-grinberg\venv\lib\site-packages\flask\app.py:1449]
+Traceback (most recent call last):
+  File "C:\Users\SMR\Desktop\flask-grinberg\flask-grinberg\venv\lib\site-packages\flask\app.py", line 2073, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\SMR\Desktop\flask-grinberg\flask-grinberg\venv\lib\site-packages\flask\app.py", line 1519, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\SMR\Desktop\flask-grinberg\flask-grinberg\venv\lib\site-packages\flask\app.py", line 1517, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\SMR\Desktop\flask-grinberg\flask-grinberg\venv\lib\site-packages\flask\app.py", line 1503, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
+  File "C:\Users\SMR\Desktop\flask-grinberg\flask-grinberg\venv\lib\site-packages\flask_login\utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+  File "C:\Users\SMR\Desktop\flask-grinberg\flask-grinberg\myapp\routes.py", line 129, in follow
+    return redirect(url_for("user",usernname = username))
+  File "C:\Users\SMR\Desktop\flask-grinberg\flask-grinberg\venv\lib\site-packages\flask\helpers.py", line 336, in url_for
+    return appctx.app.handle_url_build_error(error, endpoint, values)
+  File "C:\Users\SMR\Desktop\flask-grinberg\flask-grinberg\venv\lib\site-packages\flask\helpers.py", line 323, in url_for
+    rv = url_adapter.build(
+  File "C:\Users\SMR\Desktop\flask-grinberg\flask-grinberg\venv\lib\site-packages\werkzeug\routing\map.py", line 917, in build
+    raise BuildError(endpoint, values, method, self)
+werkzeug.routing.exceptions.BuildError: Could not build url for endpoint 'user' with values ['usernname']. Did you forget to specify values ['username']?
+2022-07-31 23:43:29,447 INFO Microblog startup [in C:\Users\SMR\Desktop\flask-grinberg\flask-grinberg\myapp\logger.py:61]
+2022-07-31 23:44:21,230 INFO Microblog startup [in C:\Users\SMR\Desktop\flask-grinberg\flask-grinberg\myapp\logger.py:61]
+2022-07-31 23:44:59,630 INFO Microblog startup [in C:\Users\SMR\Desktop\flask-grinberg\flask-grinberg\myapp\logger.py:61]
+2022-07-31 23:46:20,047 INFO Microblog startup [in C:\Users\SMR\Desktop\flask-grinberg\flask-grinberg\myapp\logger.py:61]
+2022-07-31 23:49:01,665 INFO Microblog startup [in C:\Users\SMR\Desktop\flask-grinberg\flask-grinberg\myapp\logger.py:61]
+2022-07-31 23:49:25,966 INFO Microblog startup [in C:\Users\SMR\Desktop\flask-grinberg\flask-grinberg\myapp\logger.py:61]
+2022-08-01 08:02:14,117 INFO Microblog startup [in C:\Users\SMR\Desktop\flask-grinberg\flask-grinberg\myapp\logger.py:61]
+2022-08-01 08:39:49,386 INFO Microblog startup [in C:\Users\SMR\Desktop\flask-grinberg\flask-grinberg\myapp\logger.py:61]
+2022-08-01 08:40:04,386 INFO Microblog startup [in C:\Users\SMR\Desktop\flask-grinberg\flask-grinberg\myapp\logger.py:61]
+2022-08-01 08:40:19,011 INFO Microblog startup [in C:\Users\SMR\Desktop\flask-grinberg\flask-grinberg\myapp\logger.py:61]

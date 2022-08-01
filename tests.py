@@ -80,10 +80,10 @@ class TestUserModel(unittest.TestCase):
         db.session.commit()
 
         
-        f1 = u1.show_posts()
-        f2 = u2.show_posts()
-        f3 = u3.show_posts()
-        f4 = u4.show_posts()
+        f1 = u1.show_posts().all()
+        f2 = u2.show_posts().all()
+        f3 = u3.show_posts().all()
+        f4 = u4.show_posts().all()
         self.assertEqual(f1, [p2, p4, p1])
         self.assertEqual(f2, [p2, p3])
         self.assertEqual(f3, [p3, p4])

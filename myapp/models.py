@@ -59,7 +59,7 @@ class User(db.Model, UserMixin):
         return posts
 
     def show_posts(self):
-        posts = self.following_posts().union(self.posts).order_by(Post.timestamp.desc()).all()
+        posts = self.following_posts().union(self.posts).order_by(Post.timestamp.desc())
         return posts
 
 
