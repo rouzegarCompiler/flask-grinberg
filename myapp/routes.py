@@ -3,8 +3,8 @@ from flask_login import login_user, current_user, logout_user, login_required
 from werkzeug.urls import url_parse
 from datetime import datetime
 from myapp import app, db
-from myapp.forms import LoginForm, RegisterForm, EditProfileForm
-from myapp.models import User
+from myapp.forms import LoginForm, RegisterForm, EditProfileForm,PostForm
+from myapp.models import User, Post
 from myapp.faker import fake
 
 
@@ -15,10 +15,19 @@ def before_request_handler():
         db.session.commit()
 
 
-@app.route("/")
-@app.route("/index")
+@app.route("/",methods=["GET","POST"])
+@app.route("/index",methods=["GET","POST"])
 @login_required
 def index():
+    post_form = PostForm()
+    if post_form.validate_on_submit():
+       post = Post(body=post_form.body.data,author=current_user) 
+       db.session.add(post)
+       db.session.commit()
+       
+       flash("Your post added successfully")
+       return redirect(url_for("index"))
+
     myposts = [
         {
             "author": {"username": "mohammad"},
@@ -30,7 +39,7 @@ def index():
         }
     ]
 
-    return render_template("index.html", title="Home", posts=myposts)
+    return render_template("index.html", title="Home", posts=myposts,form=post_form)
 
 
 @app.route("/login", methods=["GET", "POST"])
@@ -144,3 +153,4 @@ def unfollow(username):
     db.session.commit()
     flash(f"You unfollowed {username}")
     return redirect(url_for("user",username = username))
+

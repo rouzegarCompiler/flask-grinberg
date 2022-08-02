@@ -1,14 +1,4 @@
-2022-07-30 23:36:44,120 INFO Microblog startup [in C:\Users\SMR\Desktop\flask-grinberg\flask-grinberg\myapp\logger.py:61]
-2022-07-30 23:38:18,747 ERROR Exception on /edit_profile [POST] [in C:\Users\SMR\Desktop\flask-grinberg\flask-grinberg\venv\lib\site-packages\flask\app.py:1449]
-Traceback (most recent call last):
-  File "C:\Users\SMR\Desktop\flask-grinberg\flask-grinberg\venv\lib\site-packages\sqlalchemy\engine\base.py", line 1819, in _execute_context
-    self.dialect.do_execute(
-  File "C:\Users\SMR\Desktop\flask-grinberg\flask-grinberg\venv\lib\site-packages\sqlalchemy\engine\default.py", line 732, in do_execute
-    cursor.execute(statement, parameters)
-sqlite3.IntegrityError: UNIQUE constraint failed: user.username
-
-The above exception was the direct cause of the following exception:
-
+2022-07-31 23:38:32,761 ERROR Exception on /follow/mohammad [GET] [in C:\Users\SMR\Desktop\flask-grinberg\flask-grinberg\venv\lib\site-packages\flask\app.py:1449]
 Traceback (most recent call last):
   File "C:\Users\SMR\Desktop\flask-grinberg\flask-grinberg\venv\lib\site-packages\flask\app.py", line 2073, in wsgi_app
     response = self.full_dispatch_request()
@@ -20,51 +10,88 @@ Traceback (most recent call last):
     return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
   File "C:\Users\SMR\Desktop\flask-grinberg\flask-grinberg\venv\lib\site-packages\flask_login\utils.py", line 290, in decorated_view
     return current_app.ensure_sync(func)(*args, **kwargs)
-  File "C:\Users\SMR\Desktop\flask-grinberg\flask-grinberg\myapp\routes.py", line 107, in edit_profile
-    db.session.commit()
-  File "<string>", line 2, in commit
-  File "C:\Users\SMR\Desktop\flask-grinberg\flask-grinberg\venv\lib\site-packages\sqlalchemy\orm\session.py", line 1451, in commit
-    self._transaction.commit(_to_root=self.future)
-  File "C:\Users\SMR\Desktop\flask-grinberg\flask-grinberg\venv\lib\site-packages\sqlalchemy\orm\session.py", line 829, in commit
-    self._prepare_impl()
-  File "C:\Users\SMR\Desktop\flask-grinberg\flask-grinberg\venv\lib\site-packages\sqlalchemy\orm\session.py", line 808, in _prepare_impl
-    self.session.flush()
-  File "C:\Users\SMR\Desktop\flask-grinberg\flask-grinberg\venv\lib\site-packages\sqlalchemy\orm\session.py", line 3383, in flush
-    self._flush(objects)
-  File "C:\Users\SMR\Desktop\flask-grinberg\flask-grinberg\venv\lib\site-packages\sqlalchemy\orm\session.py", line 3522, in _flush
-    with util.safe_reraise():
-  File "C:\Users\SMR\Desktop\flask-grinberg\flask-grinberg\venv\lib\site-packages\sqlalchemy\util\langhelpers.py", line 70, in __exit__
-    compat.raise_(
-  File "C:\Users\SMR\Desktop\flask-grinberg\flask-grinberg\venv\lib\site-packages\sqlalchemy\util\compat.py", line 208, in raise_
-    raise exception
-  File "C:\Users\SMR\Desktop\flask-grinberg\flask-grinberg\venv\lib\site-packages\sqlalchemy\orm\session.py", line 3483, in _flush
-    flush_context.execute()
-  File "C:\Users\SMR\Desktop\flask-grinberg\flask-grinberg\venv\lib\site-packages\sqlalchemy\orm\unitofwork.py", line 456, in execute
-    rec.execute(self)
-  File "C:\Users\SMR\Desktop\flask-grinberg\flask-grinberg\venv\lib\site-packages\sqlalchemy\orm\unitofwork.py", line 630, in execute
-    util.preloaded.orm_persistence.save_obj(
-  File "C:\Users\SMR\Desktop\flask-grinberg\flask-grinberg\venv\lib\site-packages\sqlalchemy\orm\persistence.py", line 237, in save_obj
-    _emit_update_statements(
-  File "C:\Users\SMR\Desktop\flask-grinberg\flask-grinberg\venv\lib\site-packages\sqlalchemy\orm\persistence.py", line 1001, in _emit_update_statements
-    c = connection._execute_20(
-  File "C:\Users\SMR\Desktop\flask-grinberg\flask-grinberg\venv\lib\site-packages\sqlalchemy\engine\base.py", line 1631, in _execute_20
-    return meth(self, args_10style, kwargs_10style, execution_options)
-  File "C:\Users\SMR\Desktop\flask-grinberg\flask-grinberg\venv\lib\site-packages\sqlalchemy\sql\elements.py", line 332, in _execute_on_connection
-    return connection._execute_clauseelement(
-  File "C:\Users\SMR\Desktop\flask-grinberg\flask-grinberg\venv\lib\site-packages\sqlalchemy\engine\base.py", line 1498, in _execute_clauseelement
-    ret = self._execute_context(
-  File "C:\Users\SMR\Desktop\flask-grinberg\flask-grinberg\venv\lib\site-packages\sqlalchemy\engine\base.py", line 1862, in _execute_context
-    self._handle_dbapi_exception(
-  File "C:\Users\SMR\Desktop\flask-grinberg\flask-grinberg\venv\lib\site-packages\sqlalchemy\engine\base.py", line 2043, in _handle_dbapi_exception
-    util.raise_(
-  File "C:\Users\SMR\Desktop\flask-grinberg\flask-grinberg\venv\lib\site-packages\sqlalchemy\util\compat.py", line 208, in raise_
-    raise exception
-  File "C:\Users\SMR\Desktop\flask-grinberg\flask-grinberg\venv\lib\site-packages\sqlalchemy\engine\base.py", line 1819, in _execute_context
-    self.dialect.do_execute(
-  File "C:\Users\SMR\Desktop\flask-grinberg\flask-grinberg\venv\lib\site-packages\sqlalchemy\engine\default.py", line 732, in do_execute
-    cursor.execute(statement, parameters)
-sqlalchemy.exc.IntegrityError: (sqlite3.IntegrityError) UNIQUE constraint failed: user.username
-[SQL: UPDATE user SET username=?, about_me=? WHERE user.id = ?]
-[parameters: ('ali', 'hi this is me', 1)]
-(Background on this error at: https://sqlalche.me/e/14/gkpj)
-2022-07-30 23:39:30,963 INFO Microblog startup [in C:\Users\SMR\Desktop\flask-grinberg\flask-grinberg\myapp\logger.py:61]
+  File "C:\Users\SMR\Desktop\flask-grinberg\flask-grinberg\myapp\routes.py", line 129, in follow
+    return redirect(url_for("user",username))
+TypeError: url_for() takes 1 positional argument but 2 were given
+2022-07-31 23:40:09,135 INFO Microblog startup [in C:\Users\SMR\Desktop\flask-grinberg\flask-grinberg\myapp\logger.py:61]
+2022-07-31 23:40:49,043 ERROR Exception on /follow/ali [GET] [in C:\Users\SMR\Desktop\flask-grinberg\flask-grinberg\venv\lib\site-packages\flask\app.py:1449]
+Traceback (most recent call last):
+  File "C:\Users\SMR\Desktop\flask-grinberg\flask-grinberg\venv\lib\site-packages\flask\app.py", line 2073, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\SMR\Desktop\flask-grinberg\flask-grinberg\venv\lib\site-packages\flask\app.py", line 1519, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\SMR\Desktop\flask-grinberg\flask-grinberg\venv\lib\site-packages\flask\app.py", line 1517, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\SMR\Desktop\flask-grinberg\flask-grinberg\venv\lib\site-packages\flask\app.py", line 1503, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
+  File "C:\Users\SMR\Desktop\flask-grinberg\flask-grinberg\venv\lib\site-packages\flask_login\utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+  File "C:\Users\SMR\Desktop\flask-grinberg\flask-grinberg\myapp\routes.py", line 129, in follow
+    return redirect(url_for("user",username))
+TypeError: url_for() takes 1 positional argument but 2 were given
+2022-07-31 23:42:25,771 INFO Microblog startup [in C:\Users\SMR\Desktop\flask-grinberg\flask-grinberg\myapp\logger.py:61]
+2022-07-31 23:42:35,449 ERROR Exception on /follow/ali [GET] [in C:\Users\SMR\Desktop\flask-grinberg\flask-grinberg\venv\lib\site-packages\flask\app.py:1449]
+Traceback (most recent call last):
+  File "C:\Users\SMR\Desktop\flask-grinberg\flask-grinberg\venv\lib\site-packages\flask\app.py", line 2073, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\SMR\Desktop\flask-grinberg\flask-grinberg\venv\lib\site-packages\flask\app.py", line 1519, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\SMR\Desktop\flask-grinberg\flask-grinberg\venv\lib\site-packages\flask\app.py", line 1517, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\SMR\Desktop\flask-grinberg\flask-grinberg\venv\lib\site-packages\flask\app.py", line 1503, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
+  File "C:\Users\SMR\Desktop\flask-grinberg\flask-grinberg\venv\lib\site-packages\flask_login\utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+  File "C:\Users\SMR\Desktop\flask-grinberg\flask-grinberg\myapp\routes.py", line 129, in follow
+    return redirect(url_for("user",usernname = username))
+  File "C:\Users\SMR\Desktop\flask-grinberg\flask-grinberg\venv\lib\site-packages\flask\helpers.py", line 336, in url_for
+    return appctx.app.handle_url_build_error(error, endpoint, values)
+  File "C:\Users\SMR\Desktop\flask-grinberg\flask-grinberg\venv\lib\site-packages\flask\helpers.py", line 323, in url_for
+    rv = url_adapter.build(
+  File "C:\Users\SMR\Desktop\flask-grinberg\flask-grinberg\venv\lib\site-packages\werkzeug\routing\map.py", line 917, in build
+    raise BuildError(endpoint, values, method, self)
+werkzeug.routing.exceptions.BuildError: Could not build url for endpoint 'user' with values ['usernname']. Did you forget to specify values ['username']?
+2022-07-31 23:43:29,447 INFO Microblog startup [in C:\Users\SMR\Desktop\flask-grinberg\flask-grinberg\myapp\logger.py:61]
+2022-07-31 23:44:21,230 INFO Microblog startup [in C:\Users\SMR\Desktop\flask-grinberg\flask-grinberg\myapp\logger.py:61]
+2022-07-31 23:44:59,630 INFO Microblog startup [in C:\Users\SMR\Desktop\flask-grinberg\flask-grinberg\myapp\logger.py:61]
+2022-07-31 23:46:20,047 INFO Microblog startup [in C:\Users\SMR\Desktop\flask-grinberg\flask-grinberg\myapp\logger.py:61]
+2022-07-31 23:49:01,665 INFO Microblog startup [in C:\Users\SMR\Desktop\flask-grinberg\flask-grinberg\myapp\logger.py:61]
+2022-07-31 23:49:25,966 INFO Microblog startup [in C:\Users\SMR\Desktop\flask-grinberg\flask-grinberg\myapp\logger.py:61]
+2022-08-01 08:02:14,117 INFO Microblog startup [in C:\Users\SMR\Desktop\flask-grinberg\flask-grinberg\myapp\logger.py:61]
+2022-08-01 08:39:49,386 INFO Microblog startup [in C:\Users\SMR\Desktop\flask-grinberg\flask-grinberg\myapp\logger.py:61]
+2022-08-01 08:40:04,386 INFO Microblog startup [in C:\Users\SMR\Desktop\flask-grinberg\flask-grinberg\myapp\logger.py:61]
+2022-08-01 08:40:19,011 INFO Microblog startup [in C:\Users\SMR\Desktop\flask-grinberg\flask-grinberg\myapp\logger.py:61]
+2022-08-03 01:26:09,427 INFO Microblog startup [in /home/smr/Desktop/new/flask-grinberg/myapp/logger.py:61]
+2022-08-03 02:13:19,489 INFO Microblog startup [in /home/smr/Desktop/new/flask-grinberg/myapp/logger.py:61]
+2022-08-03 02:13:22,420 ERROR Exception on / [GET] [in /home/smr/Desktop/new/flask-grinberg/venv/lib/python3.8/site-packages/flask/app.py:1449]
+Traceback (most recent call last):
+  File "/home/smr/Desktop/new/flask-grinberg/venv/lib/python3.8/site-packages/flask/app.py", line 2073, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/smr/Desktop/new/flask-grinberg/venv/lib/python3.8/site-packages/flask/app.py", line 1519, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/smr/Desktop/new/flask-grinberg/venv/lib/python3.8/site-packages/flask/app.py", line 1517, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/smr/Desktop/new/flask-grinberg/venv/lib/python3.8/site-packages/flask/app.py", line 1503, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
+  File "/home/smr/Desktop/new/flask-grinberg/venv/lib/python3.8/site-packages/flask_login/utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+  File "/home/smr/Desktop/new/flask-grinberg/myapp/routes.py", line 36, in index
+    return render_template("index.html", title="Home", posts=myposts)
+  File "/home/smr/Desktop/new/flask-grinberg/venv/lib/python3.8/site-packages/flask/templating.py", line 154, in render_template
+    return _render(
+  File "/home/smr/Desktop/new/flask-grinberg/venv/lib/python3.8/site-packages/flask/templating.py", line 128, in _render
+    rv = template.render(context)
+  File "/home/smr/Desktop/new/flask-grinberg/venv/lib/python3.8/site-packages/jinja2/environment.py", line 1301, in render
+    self.environment.handle_exception()
+  File "/home/smr/Desktop/new/flask-grinberg/venv/lib/python3.8/site-packages/jinja2/environment.py", line 936, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "/home/smr/Desktop/new/flask-grinberg/myapp/templates/index.html", line 1, in top-level template code
+    {% extends "base.html" %}
+  File "/home/smr/Desktop/new/flask-grinberg/myapp/templates/base.html", line 40, in top-level template code
+    {% block content %}
+  File "/home/smr/Desktop/new/flask-grinberg/myapp/templates/index.html", line 8, in block 'content'
+    <p>{{ form.body.label }}</p>
+  File "/home/smr/Desktop/new/flask-grinberg/venv/lib/python3.8/site-packages/jinja2/environment.py", line 485, in getattr
+    return getattr(obj, attribute)
+jinja2.exceptions.UndefinedError: 'form' is undefined
+2022-08-03 02:15:25,050 INFO Microblog startup [in /home/smr/Desktop/new/flask-grinberg/myapp/logger.py:61]
