@@ -64,3 +64,4 @@ sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) database is locked
 [SQL: UPDATE user SET last_seen=? WHERE user.id = ?]
 [parameters: ('2022-08-02 22:05:15.916749', 1)]
 (Background on this error at: https://sqlalche.me/e/14/e3q8)
+2022-08-03 02:42:49,599 INFO Microblog startup [in /home/smr/Desktop/new/flask-grinberg/myapp/logger.py:61]

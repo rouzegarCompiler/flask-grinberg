@@ -27,19 +27,9 @@ def index():
        
        flash("Your post added successfully")
        return redirect(url_for("index"))
-
-    myposts = [
-        {
-            "author": {"username": "mohammad"},
-            "body": "This is the first post ."
-        },
-        {
-            "author": {"username": "zahra"},
-            "body": "Avengers is the best movie i have ever seen !"
-        }
-    ]
-
-    return render_template("index.html", title="Home", posts=myposts,form=post_form)
+    
+    posts = current_user.show_posts().all()
+    return render_template("index.html", title="Home", posts=posts,form=post_form)
 
 
 @app.route("/login", methods=["GET", "POST"])
