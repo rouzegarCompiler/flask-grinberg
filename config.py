@@ -30,3 +30,6 @@ class Config(object):
     
     # Admin
     ADMINS = ["mohammad.rouzegar78@gmail.com"]
+
+    # Page Number
+    POSTS_PER_PAGE = 3

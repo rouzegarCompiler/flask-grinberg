@@ -7,13 +7,11 @@ from myapp.forms import LoginForm, RegisterForm, EditProfileForm,PostForm
 from myapp.models import User, Post
 from myapp.faker import fake
 
-
 @app.before_request
 def before_request_handler():
     if current_user.is_authenticated:
         current_user.last_seen = datetime.utcnow()
         db.session.commit()
-
 
 @app.route("/",methods=["GET","POST"])
 @app.route("/index",methods=["GET","POST"])
@@ -24,18 +22,19 @@ def index():
        post = Post(body=post_form.body.data,author=current_user) 
        db.session.add(post)
        db.session.commit()
-       
+           
        flash("Your post added successfully")
        return redirect(url_for("index"))
-    
-    posts = current_user.show_posts().all()
-    return render_template("index.html", title="Home", posts=posts,form=post_form)
+    page_number = request.args.get("page",default=1,type=int)
+    posts = current_user.show_posts().paginate(page=page_number,per_page=app.config["POSTS_PER_PAGE"],error_out=False)
+    return render_template("index.html", title="Home", posts=posts.items,form=post_form)
 
 @app.route("/explore")
 @login_required
 def explore():
-    all_posts = Post.query.order_by(Post.timestamp.desc()).all()
-    return render_template("index.html",posts=all_posts)
+    page_number = request.args.get("page",default=1,type=int)
+    all_posts = Post.query.order_by(Post.timestamp.desc()).paginate(page=page_number,per_page=app.config["POSTS_PER_PAGE"],error_out=False)
+    return render_template("index.html",posts=all_posts.items)
 
 
 @app.route("/login", methods=["GET", "POST"])
@@ -149,6 +148,3 @@ def unfollow(username):
     db.session.commit()
     flash(f"You unfollowed {username}")
     return redirect(url_for("user",username = username))
-
-
-
