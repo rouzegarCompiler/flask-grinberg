@@ -31,6 +31,12 @@ def index():
     posts = current_user.show_posts().all()
     return render_template("index.html", title="Home", posts=posts,form=post_form)
 
+@app.route("/explore")
+@login_required
+def explore():
+    all_posts = Post.query.order_by(Post.timestamp.desc()).all()
+    return render_template("index.html",posts=all_posts)
+
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
@@ -143,4 +149,6 @@ def unfollow(username):
     db.session.commit()
     flash(f"You unfollowed {username}")
     return redirect(url_for("user",username = username))
+
+
 
