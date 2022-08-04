@@ -27,14 +27,18 @@ def index():
        return redirect(url_for("index"))
     page_number = request.args.get("page",default=1,type=int)
     posts = current_user.show_posts().paginate(page=page_number,per_page=app.config["POSTS_PER_PAGE"],error_out=False)
-    return render_template("index.html", title="Home", posts=posts.items,form=post_form)
+    prev_page = url_for("index",page=posts.prev_num) if posts.has_prev else None
+    next_page = url_for("index",page=posts.next_num) if posts.has_next else None
+    return render_template("index.html", title="Home", posts=posts.items,form=post_form,prev_page=prev_page, next_page=next_page)
 
 @app.route("/explore")
 @login_required
 def explore():
     page_number = request.args.get("page",default=1,type=int)
-    all_posts = Post.query.order_by(Post.timestamp.desc()).paginate(page=page_number,per_page=app.config["POSTS_PER_PAGE"],error_out=False)
-    return render_template("index.html",posts=all_posts.items)
+    posts = Post.query.order_by(Post.timestamp.desc()).paginate(page=page_number,per_page=app.config["POSTS_PER_PAGE"],error_out=False)
+    prev_page = url_for("index",page=posts.prev_num) if posts.has_prev else None
+    next_page = url_for("index",page=posts.next_num) if posts.has_next else None
+    return render_template("index.html",title="Explore page",posts=posts.items,prev_page=prev_page,next_page=next_page)
 
 
 @app.route("/login", methods=["GET", "POST"])
