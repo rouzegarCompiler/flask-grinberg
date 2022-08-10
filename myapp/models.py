@@ -1,8 +1,10 @@
 from datetime import datetime
 from hashlib import md5
+import jwt
+from time import time
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
-from myapp import db, login
+from myapp import app, db, login
 
 
 follow_rel = db.Table(
@@ -61,8 +63,19 @@ class User(db.Model, UserMixin):
     def show_posts(self):
         posts = self.following_posts().union(self.posts).order_by(Post.timestamp.desc())
         return posts
-
-
+    
+    '''Expire in 10 minutes'''
+    def get_reset_password_token(self,expire_time=10*60): 
+        reset_password_token = jwt.encode({"reset_password":self.id,"exp":time() + expire_time},app.config["SECRET_KEY"],algorithm='HS256')
+        return reset_password_token
+    
+    @staticmethod
+    def verify_reset_password_token(token):
+        try:
+            id = int(jwt.decode(token,app.config["SECRET_KEY"],algorithms=['HS256'])["reset_password"])
+        except:
+            return
+        return User.query.get(id)
 
 @login.user_loader
 def load_user(id):
