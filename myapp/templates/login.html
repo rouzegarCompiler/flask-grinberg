@@ -1,43 +1,17 @@
 {% extends "base.html" %}
 
-{% block content %}
-<form action="" method="post">
-    {{ form.hidden_tag() }}
-    <div>
-        <p>
-        {{ form.username.label }}
-        </p>
-        {{ form.username(size=20) }} <br>
-        {% with errors=form.username.errors %}
-            {% for error in errors %}
-                <span style="color: red;">{{ error }}</span>
-            {% endfor %}
-        {% endwith %}
-    </div>
-    <div>
-        <p>
-            {{ form.password.label }}
-        </p>
-        {{ form.password(size=20) }} <br>
-        {% with errors=form.password.errors %}
-            {% for error in errors %}
-                <span style="color: red;">{{ error }}</span>
-            {% endfor %}
-        {% endwith %}
-    </div>
-    <br>
-    <div>
-        {{ form.remember_me }} {{ form.remember_me.label }}    
-    </div>
+{% block app_content %}
+{% from 'bootstrap5/form.html' import render_form %}
+<div class="row">
+	<div class="col-md-6 m-auto">
+		{{ render_form(form) }}
+		<br>
+		<p>Didn't register ? Register <a href="{{ url_for('register') }}">here</a></p>
 
-    <br>
-    {{ form.submit() }}
-</form>
-<br>
-<p>Didn't register ? Register <a href="{{ url_for('register') }}">here</a></p>
-
-<p>Forget your password ?
-<a href="{{ url_for('reset_password_request') }}">Click to reset !</a>
-</p>
+		<p>Forget your password ?
+		<a href="{{ url_for('reset_password_request') }}">Click to reset !</a>
+		</p>
+	</div>
+</div>
 
 {% endblock %}

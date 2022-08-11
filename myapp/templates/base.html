@@ -1,44 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+	{% block head %}
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>
+	
+	{% block styles %}
+		{{ bootstrap.load_css() }}
+	{% endblock %}
+
+	<title>
         {% if title %}
             {{ title }} - Microblog
         {% else %}
             Welcome to Microblog
         {% endif %}
     </title>
+	{% endblock %}
 </head>
+
 <body>
+	{% from 'bootstrap5/nav.html' import render_nav_item %}
     <!-- Navigation Bar -->
-    <div>
-        Microblog : 
-        <a href="{{ url_for('index') }}">Home</a>
-        <a href="{{ url_for('explore') }}">Explore</a>
-        {% if current_user.is_anonymous %}
-        <a href="{{ url_for('login') }}">Login</a>
-        {% else %}
-        <a href="{{ url_for('user',username = current_user.username) }}">Profile</a>
-        <a href="{{ url_for('logout') }}">Logout</a>
-        {% endif %}
-    </div>
+	<nav class="navbar navbar-expand-lg bg-light">
+	  <div class="container">
+		  <a class="navbar-brand link-dark" href="{{ url_for('index') }}">Microblog</a>
+		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+		  {% from 'bootstrap5/utils.html' import render_icon %}
+		  <span>{{ render_icon('list') }}</span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+		  <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+			{{ render_nav_item('index', 'Home', use_li=True) }}
+			{{ render_nav_item('explore', 'Explore' ,use_li=True) }}
+			{% if current_user.is_anonymous %}
+			{{ render_nav_item('login' , 'Login',use_li=True) }}
+			{% else %}
+			{{ render_nav_item('user', 'Profile' ,use_li=True, username = current_user.username) }}
+			{{ render_nav_item('logout', 'Logout',use_li=True) }}
+			{% endif %}
+		  </ul>
+		</div>
+	  </div>
+	</nav>
 
+	{% block content %}
     <!-- Flash messages -->
-    {% with flashed_messages = get_flashed_messages() %}
+	<div class="container">
+	
+	{% with flashed_messages = get_flashed_messages() %}
         {% if flashed_messages %}
-            <ul>
                 {% for message in flashed_messages %}
-                    <li>{{ message }}</li>
+                    <div class="alert alert-info">{{ message }}</div>
                 {% endfor %}
-            </ul>
         {% endif %}
-    {% endwith %}
+	{% endwith %}<br>
 
-    <!-- Content -->
-    {% block content %}
-    {% endblock %}
+	{% block app_content %}
+	{% endblock %}
+
+	</div>
+	{% endblock %}
+
+	{% block scripts %}
+		{{ bootstrap.load_js() }}
+	{% endblock %}
 </body>
 </html>

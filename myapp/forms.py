@@ -15,7 +15,7 @@ class RegisterForm(FlaskForm):
     username = StringField(label="Username", validators=[DataRequired()])
     email = StringField(label="Email", validators=[DataRequired(), Email()])
     password = PasswordField(label="Password", validators=[DataRequired()])
-    password2 = PasswordField(label="Password", validators=[DataRequired(), EqualTo("password")])
+    password2 = PasswordField(label="Repeat Your Password", validators=[DataRequired(), EqualTo("password")])
     submit = SubmitField("Register")
 
     def validate_username(self, username):
@@ -49,6 +49,8 @@ class PostForm(FlaskForm):
     body = TextAreaField(label="Say something",validators=[DataRequired(),Length(min=1,max=140)])
     submit = SubmitField("Submit")
 
+class EmptyForm(FlaskForm):
+    submit = SubmitField()
 
 class ResetPasswordRequestForm(FlaskForm):
     email = StringField(label="Email",validators=[DataRequired(),Email()])

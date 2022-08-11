@@ -1,22 +1,17 @@
 {% extends "base.html" %}
 
-{% block content %}
+{% block app_content %}
     <h1>Hello {{ current_user.username }} !</h1>
     <br>
 	{% if form %}
-	<form action="" method="post">
-		{{ form.csrf_token }}
-		<div>
-			<p>{{ form.body.label }}</p>
-			{{ form.body(cols=30,rows=5) }}
-		</div>
-		{{ form.submit() }}
-	</form>
+	{% from 'bootstrap5/form.html' import render_form %}
+	{{ render_form(form) }}<br>
 	{% endif %}
 
 	{% include "_posts.html" %}
 	
-	{% include "_pagination.html" %}
+	{% from 'bootstrap4/pagination.html' import render_pagination %}
+	{{ render_pagination(pagination,align='center') }}
 
 {% endblock %}
 

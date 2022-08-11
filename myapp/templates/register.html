@@ -1,53 +1,11 @@
 {% extends "base.html" %}
 
-{% block content %}
-<form action="" method="post">
-    {{ form.hidden_tag() }}
-    <div>
-        <p>
-        {{ form.username.label }}
-        </p>
-        {{ form.username(size=20) }} <br>
-        {% with errors=form.username.errors %}
-            {% for error in errors %}
-                <span style="color: red;">{{ error }}</span>
-            {% endfor %}
-        {% endwith %}
-    </div>
-    <div>
-        <p>
-        {{ form.email.label }}
-        </p>
-        {{ form.email(size=20) }} <br>
-        {% with errors=form.email.errors %}
-            {% for error in errors %}
-                <span style="color: red;">{{ error }}</span>
-            {% endfor %}
-        {% endwith %}
-    </div>
-    <div>
-        <p>
-            {{ form.password.label }}
-        </p>
-        {{ form.password(size=20) }} <br>
-        {% with errors=form.password.errors %}
-            {% for error in errors %}
-                <span style="color: red;">{{ error }}</span>
-            {% endfor %}
-        {% endwith %}
-    </div>
-    <div>
-        <p>
-            {{ form.password2.label }}
-        </p>
-        {{ form.password2(size=20) }} <br>
-        {% with errors=form.password2.errors %}
-            {% for error in errors %}
-                <span style="color: red;">{{ error }}</span>
-            {% endfor %}
-        {% endwith %}
-    </div>
-    <br>
-    {{ form.submit() }}
-</form>
+{% block app_content %}
+<h1 class="text-center">Register Page</h1>
+{% from 'bootstrap5/form.html' import render_form %}
+<div class="row">
+	<div class="col-md-6 m-auto">
+		{{ render_form(form) }}
+	</div>
+</div>
 {% endblock %}

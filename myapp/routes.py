@@ -3,7 +3,7 @@ from flask_login import login_user, current_user, logout_user, login_required
 from werkzeug.urls import url_parse
 from datetime import datetime
 from myapp import app, db
-from myapp.forms import LoginForm, RegisterForm, EditProfileForm, PostForm, ResetPasswordRequestForm, ResetPasswordForm
+from myapp.forms import LoginForm, RegisterForm, EditProfileForm, PostForm, EmptyForm, ResetPasswordRequestForm, ResetPasswordForm
 from myapp.models import User, Post
 from myapp.faker import fake
 from myapp.email import send_email_reset_password
@@ -24,23 +24,19 @@ def index():
        post = Post(body=post_form.body.data,author=current_user) 
        db.session.add(post)
        db.session.commit()
-           
        flash("Your post added successfully")
        return redirect(url_for("index"))
+
     page_number = request.args.get("page",default=1,type=int)
     posts = current_user.show_posts().paginate(page=page_number,per_page=app.config["POSTS_PER_PAGE"],error_out=False)
-    prev_page = url_for("index",page=posts.prev_num) if posts.has_prev else None
-    next_page = url_for("index",page=posts.next_num) if posts.has_next else None
-    return render_template("index.html", title="Home", posts=posts.items,form=post_form,prev_page=prev_page, next_page=next_page)
+    return render_template("index.html", title="Home", posts=posts.items,form=post_form,pagination=posts)
 
 @app.route("/explore")
 @login_required
 def explore():
     page_number = request.args.get("page",default=1,type=int)
     posts = Post.query.order_by(Post.timestamp.desc()).paginate(page=page_number,per_page=app.config["POSTS_PER_PAGE"],error_out=False)
-    prev_page = url_for("explore",page=posts.prev_num) if posts.has_prev else None
-    next_page = url_for("explore",page=posts.next_num) if posts.has_next else None
-    return render_template("index.html",title="Explore page",posts=posts.items,prev_page=prev_page,next_page=next_page)
+    return render_template("index.html",title="Explore page",posts=posts.items,pagination=posts)
 
 
 @app.route("/login", methods=["GET", "POST"])
@@ -59,7 +55,7 @@ def login():
         if not next_page or url_parse(next_page).netloc != "":
             next_page = url_for("index")
         return redirect(next_page)
-    return render_template('login.html', form=login_form)
+    return render_template('login.html', title="Login", form=login_form)
 
 
 @app.route("/logout")
@@ -81,7 +77,7 @@ def register():
         db.session.commit()
         flash("You're registration completed !!!")
         return redirect(url_for("login"))
-    return render_template("register.html", form=register_form)
+    return render_template("register.html",title="Register", form=register_form)
 
 
 @app.route("/user/<username>")
@@ -90,9 +86,8 @@ def user(username):
     user = User.query.filter_by(username=username).first_or_404()
     page_number = request.args.get("page",default=1,type=int)
     posts = user.posts.order_by(Post.timestamp.desc()).paginate(page=page_number,per_page=app.config["POSTS_PER_PAGE"],error_out=False)
-    prev_page = url_for("user",page=posts.prev_num,username=username) if posts.has_prev else None
-    next_page = url_for("user",page=posts.next_num,username=username) if posts.has_next else None
-    return render_template("user.html", user=user, posts=posts.items , prev_page=prev_page,next_page=next_page)
+    form = EmptyForm()
+    return render_template("user.html",title = "User page", user=user, form=form, posts=posts.items , pagination=posts)
 
 
 @app.route("/edit_profile", methods=["GET", "POST"])
@@ -108,10 +103,10 @@ def edit_profile():
     elif request.method.upper() == "GET":
         edit_profile_form.username.data = current_user.username
         edit_profile_form.about_me.data = current_user.about_me
-    return render_template("edit_profile.html", form=edit_profile_form)
+    return render_template("edit_profile.html",title="Edit profile", form=edit_profile_form)
 
 
-@app.route("/follow/<username>")
+@app.route("/follow/<username>", methods=["GET","POST"])
 @login_required
 def follow(username):
     user = User.query.filter_by(username=username).first()
@@ -128,7 +123,7 @@ def follow(username):
     return redirect(url_for("user",username = username))
 
 
-@app.route("/unfollow/<username>")
+@app.route("/unfollow/<username>",methods=["GET","POST"])
 @login_required
 def unfollow(username):
     user = User.query.filter_by(username=username).first()
