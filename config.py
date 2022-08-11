@@ -32,4 +32,4 @@ class Config(object):
     ADMINS = ["mohammad.rouzegar78@gmail.com"]
 
     # Page Number
-    POSTS_PER_PAGE = 3
+    POSTS_PER_PAGE = 10

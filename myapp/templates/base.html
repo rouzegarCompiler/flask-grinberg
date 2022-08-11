@@ -65,6 +65,8 @@
 
 	{% block scripts %}
 		{{ bootstrap.load_js() }}
+		{{ moment.include_moment() }}
 	{% endblock %}
+	{{ moment.locale(auto_detect=True) }}
 </body>
 </html>
